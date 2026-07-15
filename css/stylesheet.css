@@ -651,9 +651,9 @@ body:has(#step8:checked) #btn-step8 { display: none; }
   /* Show all 4 photos on mobile (2 stacked on each side) */
   .album-photo img { width: clamp(70px, 20vw, 100px); border-width: 3px; }
   .album-left-1  { top: 56px; left: 4px; }
-  .album-left-2  { display: block !important; top: calc(56px + clamp(70px, 20vw, 100px) + 10px); left: 6px; }
+  .album-left-2  { top: calc(56px + clamp(70px, 20vw, 100px) + 10px); left: 6px; }
   .album-right-1 { top: 56px; right: 4px; }
-  .album-right-2 { display: block !important; top: calc(56px + clamp(70px, 20vw, 100px) + 10px); right: 6px; }
+  .album-right-2 { top: calc(56px + clamp(70px, 20vw, 100px) + 10px); right: 6px; }
 
   /* Cake smaller */
   .cake { width: 180px; height: 180px; }
@@ -683,9 +683,9 @@ body:has(#step8:checked) #btn-step8 { display: none; }
 @media (min-width: 481px) and (max-width: 768px) {
   .album-photo img { width: clamp(90px, 16vw, 140px); }
   .album-left-1  { top: 60px; left: 10px; }
-  .album-left-2  { display: block !important; top: calc(60px + clamp(90px, 16vw, 140px) + 15px); left: 12px; }
+  .album-left-2  { top: calc(60px + clamp(90px, 16vw, 140px) + 15px); left: 12px; }
   .album-right-1 { top: 60px; right: 10px; }
-  .album-right-2 { display: block !important; top: calc(60px + clamp(90px, 16vw, 140px) + 15px); right: 12px; }
+  .album-right-2 { top: calc(60px + clamp(90px, 16vw, 140px) + 15px); right: 12px; }
   .profile-img   { right: -32%; width: clamp(80px,14vw,120px); height: clamp(80px,14vw,120px); }
   .btn { font-size: 11px; padding: 9px 13px; }
 }
