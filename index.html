@@ -1,172 +1,232 @@
 <!DOCTYPE html>
-<!--[if !IE]><!--><html lang="en"><!-- <![endif]-->
+<html lang="en">
 <head>
-  <title>Happy Birthday</title>
+  <title>Happy Birthday Kiran 🎂</title>
   <meta charset="UTF-8" />
-  <meta name="description" content="Happy Birthday">
+  <meta name="description" content="Happy Birthday – A pure CSS interactive birthday greeting card">
   <meta name="robots" content="index, follow" />
-  <link rel="icon" href="../birthday/main/assets/images/favicon.ico" type="image/x-icon">
-  <meta name="keywords" content="Birthday, Happy">
+  <meta name="keywords" content="Birthday, Happy, Greeting">
   <meta property="og:type" content="E-Greeting" />
   <meta property="og:description" content="Wish you a very Happy Birthday">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" type="text/css">
-  <!-- Main stylesheet -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;700&family=Lato:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 </head>
 
 <body>
-  <!-- Loading screen -->
-  <div class="loading"></div>
 
-  <!-- ====== 4 New Album Photos (from parent birthday folder) ====== -->
-  <img src="../birthday/1000582496.jpg" class="album-photo album-left-1"  alt="Photo 1">
-  <img src="../birthday/1000582497.jpg" class="album-photo album-left-2"  alt="Photo 2">
-  <img src="../birthday/1000583165.jpg" class="album-photo album-right-1" alt="Photo 3">
-  <img src="../birthday/1000583167.png" class="album-photo album-right-2" alt="Photo 4">
+  <!--
+    =====================================================================
+    PURE CSS TRICK:
+    All steps are controlled by hidden <input type="checkbox"> elements.
+    CSS :checked sibling selectors drive every visual change.
+    Step order:
+      step1 = Turn On Lights
+      step2 = Play Music
+      step3 = Decorate (Banner + Photos)
+      step4 = Balloons Flying
+      step5 = Cake Appear
+      step6 = Light Candle
+      step7 = Wish Message (balloons spell HBD)
+      step8 = Story / Message scroll
+    =====================================================================
+  -->
 
-  <!-- Zoom hint -->
-  <img src="../birthday/main/assets/images/can-zoom.png" class="can-zoom" alt="Click to zoom">
+  <!-- Hidden checkbox state controls -->
+  <input type="checkbox" id="step1" class="step-check">
+  <input type="checkbox" id="step2" class="step-check">
+  <input type="checkbox" id="step3" class="step-check">
+  <input type="checkbox" id="step4" class="step-check">
+  <input type="checkbox" id="step5" class="step-check">
+  <input type="checkbox" id="step6" class="step-check">
+  <input type="checkbox" id="step7" class="step-check">
+  <input type="checkbox" id="step8" class="step-check">
 
-  <!-- Background music -->
-  <audio class="song" controls loop>
-    <source src="../birthday/main/assets/audio/hbd.mp3"></source>
-    Your browser isn't invited for super fun audio time.
+  <!-- Lightbox checkbox -->
+  <input type="checkbox" id="lb-open" class="step-check">
+  <!-- Hidden radio for which photo is zoomed -->
+  <input type="radio" name="lb-photo" id="lb-p1" class="step-check">
+  <input type="radio" name="lb-photo" id="lb-p2" class="step-check">
+  <input type="radio" name="lb-photo" id="lb-p3" class="step-check">
+  <input type="radio" name="lb-photo" id="lb-p4" class="step-check">
+
+  <!-- ===== Loading Screen ===== -->
+  <div class="loading" id="loading-screen"></div>
+
+  <!-- ===== Album Photos (shown after step3) ===== -->
+  <label for="lb-p1" class="album-photo album-left-1">
+    <img src="1000582496.jpg" alt="Photo 1">
+  </label>
+  <label for="lb-p2" class="album-photo album-left-2">
+    <img src="1000582497.jpg" alt="Photo 2">
+  </label>
+  <label for="lb-p3" class="album-photo album-right-1">
+    <img src="1000583165.jpg" alt="Photo 3">
+  </label>
+  <label for="lb-p4" class="album-photo album-right-2">
+    <img src="1000583167.png" alt="Photo 4">
+  </label>
+
+  <!-- ===== Lightbox Overlay ===== -->
+  <div class="lightbox" id="lightbox">
+    <label for="lb-open" class="lightbox-close" aria-label="Close lightbox">✕</label>
+    <div class="lb-images">
+      <img class="lb-img lb-img-1" src="1000582496.jpg" alt="Photo 1 zoomed">
+      <img class="lb-img lb-img-2" src="1000582497.jpg" alt="Photo 2 zoomed">
+      <img class="lb-img lb-img-3" src="1000583165.jpg" alt="Photo 3 zoomed">
+      <img class="lb-img lb-img-4" src="1000583167.png" alt="Photo 4 zoomed">
+    </div>
+  </div>
+
+  <!-- ===== Balloon Border ===== -->
+  <img src="main/assets/images/Balloon-Border.png" width="100%" class="balloon-border" alt="">
+
+  <!-- ===== HBD Balloons ===== -->
+  <div class="balloons balloons-rotate-behaviour-one" id="b1"><h2 style="color:#F2B300;">H</h2></div>
+  <div class="balloons balloons-rotate-behaviour-two" id="b2"><h2 style="color:#0719D4;">B</h2></div>
+  <div class="balloons" id="b3"><h2 style="color:#D14D39;">D</h2></div>
+  <div class="balloons balloons-rotate-behaviour-one" id="b4"><h2 style="color:#8FAD00;">B</h2></div>
+  <div class="balloons balloons-rotate-behaviour-two" id="b5"><h2 style="color:#8377E4;">A</h2></div>
+  <div class="balloons" id="b6"><h2 style="color:#99C96A;">B</h2></div>
+  <div class="balloons balloons-rotate-behaviour-one" id="b7"><h2 style="color:#20CFB4;">Y</h2></div>
+
+  <!-- ===== Background Music (autoplay + hidden) ===== -->
+  <audio id="bg-music" autoplay muted loop style="display:none">
+    <source src="main/assets/audio/hbd.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Balloons -->
-  <div class="balloons text-center" id="b1"><h2 style="color:#F2B300;">H</h2></div>
-  <div class="balloons text-center" id="b2"><h2 style="color:#0719D4;">B</h2></div>
-  <div class="balloons text-center" id="b3"><h2 style="color:#D14D39;">D</h2></div>
-  <div class="balloons text-center" id="b4"><h2 style="color:#8FAD00;">B</h2></div>
-  <div class="balloons text-center" id="b5"><h2 style="color:#8377E4;">A</h2></div>
-  <div class="balloons text-center" id="b6"><h2 style="color:#99C96A;">B</h2></div>
-  <div class="balloons text-center" id="b7"><h2 style="color:#20CFB4;">Y</h2></div>
+  <!-- ===== Main Container ===== -->
+  <div class="container" id="main-container">
 
-  <img src="../birthday/main/assets/images/Balloon-Border.png" width="100%" class="balloon-border" alt="">
-
-  <!-- Main container -->
-  <div class="container">
-
-    <!-- Bulbs row -->
-    <div class="row">
-      <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_yellow"></div></div>
-      <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_red"></div></div>
-      <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_blue"></div></div>
-      <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_green"></div></div>
-      <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_pink"></div></div>
-      <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_orange"></div></div>
+    <!-- Bulbs Row -->
+    <div class="row bulbs-row">
+      <div class="bulb-holder"><div class="bulb" id="bulb_yellow"></div></div>
+      <div class="bulb-holder"><div class="bulb" id="bulb_red"></div></div>
+      <div class="bulb-holder"><div class="bulb" id="bulb_blue"></div></div>
+      <div class="bulb-holder"><div class="bulb" id="bulb_green"></div></div>
+      <div class="bulb-holder"><div class="bulb" id="bulb_pink"></div></div>
+      <div class="bulb-holder"><div class="bulb" id="bulb_orange"></div></div>
     </div>
 
     <!-- Banner -->
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <img src="../birthday/main/assets/images/banner.png" class="bannar" alt="Happy Birthday Banner">
+    <div class="row banner-row">
+      <div class="banner-wrap">
+        <img src="main/assets/images/banner.png" class="bannar" alt="Happy Birthday Banner">
       </div>
     </div>
 
     <!-- Cake -->
     <div class="row cake-cover">
-      <div class="col-md-12 text-center">
-        <div class="cake">
-          <div class="velas">
-            <div class="fuego"></div>
-            <div class="fuego"></div>
-            <div class="fuego"></div>
-            <div class="fuego"></div>
-            <div class="fuego"></div>
-          </div>
-          <div class="cobertura"></div>
-          <img src="../birthday/main/assets/images/person.png" class="profile-img" alt="">
-          <div class="bizcocho"></div>
+      <div class="cake" id="cake">
+        <div class="velas">
+          <div class="fuego"></div>
+          <div class="fuego"></div>
+          <div class="fuego"></div>
+          <div class="fuego"></div>
+          <div class="fuego"></div>
         </div>
+        <div class="cobertura"></div>
+        <img src="main/assets/images/person.png" class="profile-img" alt="Person">
+        <div class="bizcocho"></div>
       </div>
     </div>
 
-    <!-- Birthday message -->
-    <div class="row message">
-      <div class="col-md-12">
-        <p>Today is...</p>
-        <p>as beautiful as other days</p>
-        <p>but you realize</p>
-        <p>another year has gone</p>
-        <p>in a blink of the eyes</p>
-        <p><strong>however</strong></p>
-        <p>Do you know..?</p>
-        <p>today is just special</p>
-        <p>so special to you</p>
-        <p>that's why</p>
-        <p>Let's make it...</p>
-        <p>the best celebration ever</p>
-        <p>and let me share...</p>
-        <p>a piece of happiness to you</p>
-        <p>I made all this...</p>
-        <p>as a birthday present to you</p>
-        <p>thanks for everything</p>
-        <p>I wish you all the best</p>
-        <p>May your life be at ease</p>
-        <p>May all your wishes come true</p>
-        <p>Remember</p>
-        <p>your ambitions</p>
-        <p>you live as a free bird...</p>
-        <p>flying in the blue sky</p>
-        <p>Now things are different...</p>
-        <p>real story of your life</p>
-        <p>is just about to begin</p>
-        <p>indeed..</p>
-        <p>but...</p>
-        <p>don't worry</p>
-        <p>because...</p>
-        <p>God has your back</p>
-        <p>and</p>
-        <p>this year will be better</p>
-        <p>and I hope</p>
-        <p>you'll find...</p>
-        <p>happiness along the way</p>
-        <p>keep your spirit up</p>
-        <p>enjoy every single moment...</p>
-        <p>that you experience today</p>
-        <p>fill it with your most beautiful smile</p>
-        <p>and make it the best memory..</p>
-        <p>lastly...</p>
-        <p>I'd like to wish you one more time</p>
-        <p>a very happy birthday babyy ❤️</p>
-      </div>
+    <!-- Birthday message lines (shown one by one via CSS animation after step8) -->
+    <div class="message" id="message">
+      <p class="msg msg-1">Today is...</p>
+      <p class="msg msg-2">as beautiful as other days</p>
+      <p class="msg msg-3">but you realize</p>
+      <p class="msg msg-4">another year has gone</p>
+      <p class="msg msg-5">in a blink of the eyes</p>
+      <p class="msg msg-6"><strong>however</strong></p>
+      <p class="msg msg-7">Do you know..?</p>
+      <p class="msg msg-8">today is just special</p>
+      <p class="msg msg-9">so special to you</p>
+      <p class="msg msg-10">that's why</p>
+      <p class="msg msg-11">Let's make it...</p>
+      <p class="msg msg-12">the best celebration ever</p>
+      <p class="msg msg-13">and let me share...</p>
+      <p class="msg msg-14">a piece of happiness to you</p>
+      <p class="msg msg-15">I made all this...</p>
+      <p class="msg msg-16">as a birthday present to you</p>
+      <p class="msg msg-17">thanks for everything</p>
+      <p class="msg msg-18">I wish you all the best</p>
+      <p class="msg msg-19">May your life be at ease</p>
+      <p class="msg msg-20">May all your wishes come true</p>
+      <p class="msg msg-21">Remember</p>
+      <p class="msg msg-22">your ambitions</p>
+      <p class="msg msg-23">you live as a free bird...</p>
+      <p class="msg msg-24">flying in the blue sky</p>
+      <p class="msg msg-25">Now things are different...</p>
+      <p class="msg msg-26">real story of your life</p>
+      <p class="msg msg-27">is just about to begin</p>
+      <p class="msg msg-28">indeed..</p>
+      <p class="msg msg-29">but...</p>
+      <p class="msg msg-30">don't worry</p>
+      <p class="msg msg-31">because...</p>
+      <p class="msg msg-32">God has your back</p>
+      <p class="msg msg-33">and</p>
+      <p class="msg msg-34">this year will be better</p>
+      <p class="msg msg-35">and I hope</p>
+      <p class="msg msg-36">you'll find...</p>
+      <p class="msg msg-37">happiness along the way</p>
+      <p class="msg msg-38">keep your spirit up</p>
+      <p class="msg msg-39">enjoy every single moment...</p>
+      <p class="msg msg-40">that you experience today</p>
+      <p class="msg msg-41">fill it with your most beautiful smile</p>
+      <p class="msg msg-42">and make it the best memory..</p>
+      <p class="msg msg-43">lastly...</p>
+      <p class="msg msg-44">I'd like to wish you one more time</p>
+      <p class="msg msg-45 msg-final">a very happy birthday babyy ❤️</p>
     </div>
 
-    <!-- Control buttons -->
-    <div class="navbar navbar-fixed-bottom">
-      <div class="row">
-        <div class="col-md-6 text-center col-md-offset-3">
-          <button class="btn btn-primary" id="turn_on">Turn On Lights</button>
-          <button class="btn btn-primary" id="play">Play the Music Buddy</button>
-          <button class="btn btn-primary" id="bannar_coming">Let's Decorate</button>
-          <button class="btn btn-primary" id="balloons_flying">Calm, i got you some balloons</button>
-          <button class="btn btn-primary" id="cake_fadein">Cake? of course!</button>
-          <button class="btn btn-primary" id="light_candle">Don't forget to Light the Candle</button>
-          <button class="btn btn-primary" id="wish_message">Happy Birthday</button>
-          <button class="btn btn-primary" id="story">A message for you</button>
-        </div>
-      </div>
-    </div>
+  </div><!-- /container -->
 
-  </div>
+  <!-- ===== Control Buttons (Bottom navbar) ===== -->
+  <nav class="control-panel" id="ctrl-panel" aria-label="Birthday controls">
 
-  <!-- Lightbox overlay -->
-  <div class="lightbox" id="lightbox">
-    <img src="" alt="zoomed photo">
-  </div>
+    <!-- Step 1: Turn On Lights -->
+    <label for="step1" class="btn btn-step" id="btn-step1">
+      <span>✨ Turn On Lights</span>
+    </label>
 
-  <!-- Scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <script src="js/effect.js"></script>
+    <!-- Step 2: Unmute Music (audio autoplays muted; this step unmutes via CSS filter trick) -->
+    <label for="step2" class="btn btn-step" id="btn-step2">
+      <span>🔊 Unmute the Music</span>
+    </label>
+
+    <!-- Step 3: Decorate -->
+    <label for="step3" class="btn btn-step" id="btn-step3">
+      <span>🎉 Let's Decorate</span>
+    </label>
+
+    <!-- Step 4: Balloons -->
+    <label for="step4" class="btn btn-step" id="btn-step4">
+      <span>🎈 Calm, I Got You Some Balloons</span>
+    </label>
+
+    <!-- Step 5: Cake -->
+    <label for="step5" class="btn btn-step" id="btn-step5">
+      <span>🎂 Cake? Of Course!</span>
+    </label>
+
+    <!-- Step 6: Light Candle -->
+    <label for="step6" class="btn btn-step" id="btn-step6">
+      <span>🕯️ Don't Forget to Light the Candle</span>
+    </label>
+
+    <!-- Step 7: Wish Message -->
+    <label for="step7" class="btn btn-step" id="btn-step7">
+      <span>🥳 Happy Birthday</span>
+    </label>
+
+    <!-- Step 8: Story -->
+    <label for="step8" class="btn btn-step" id="btn-step8">
+      <span>💌 A Message for You</span>
+    </label>
+
+  </nav>
+
 </body>
 </html>
