@@ -45,9 +45,8 @@
   <input type="checkbox" id="step8" class="step-check">
 
 
-  <!-- Lightbox checkbox -->
-  <input type="checkbox" id="lb-open" class="step-check">
-  <!-- Hidden radio for which photo is zoomed -->
+  <!-- Hidden radio for which photo is zoomed, including a close option -->
+  <input type="radio" name="lb-photo" id="lb-close-radio" class="step-check" checked>
   <input type="radio" name="lb-photo" id="lb-p1" class="step-check">
   <input type="radio" name="lb-photo" id="lb-p2" class="step-check">
   <input type="radio" name="lb-photo" id="lb-p3" class="step-check">
@@ -72,7 +71,10 @@
 
   <!-- ===== Lightbox Overlay ===== -->
   <div class="lightbox" id="lightbox">
-    <label for="lb-open" class="lightbox-close" aria-label="Close lightbox">✕</label>
+    <!-- Click backdrop to close -->
+    <label for="lb-close-radio" class="lightbox-backdrop" aria-label="Close lightbox"></label>
+    <!-- Click ✕ to close -->
+    <label for="lb-close-radio" class="lightbox-close" aria-label="Close lightbox">✕</label>
     <div class="lb-images">
       <img class="lb-img lb-img-1" src="1000582496.jpg" alt="Photo 1 zoomed">
       <img class="lb-img lb-img-2" src="1000582497.jpg" alt="Photo 2 zoomed">
